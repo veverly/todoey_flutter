@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:todoey_flutter/models/task_data.dart';
 import 'package:todoey_flutter/screens/add_task_screen.dart';
 import '../widgets/task_list.dart';
-import 'package:todoey_flutter/screens/add_task_screen.dart';
-import '../models/task.dart';
+import 'package:provider/provider.dart';
 
-class TaskScreen extends StatefulWidget {
-  const TaskScreen({Key? key}) : super(key: key);
-
-  @override
-  State<TaskScreen> createState() => _TaskScreenState();
-}
-
-class _TaskScreenState extends State<TaskScreen> {
-  List<Task> tasks = [];
+class TaskScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +21,7 @@ class _TaskScreenState extends State<TaskScreen> {
               child: Container(
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: AddTaskScreen((newText) {
-                  setState(() {
-                    tasks.add(Task(newText));
-                  });
-                  Navigator.pop(context);
-                }),
+                child: AddTaskScreen(),
               ),
             ),
           );
@@ -71,7 +58,7 @@ class _TaskScreenState extends State<TaskScreen> {
                           fontWeight: FontWeight.w700),
                     ),
                     Text(
-                      '${tasks.length} Task\'s',
+                      '${Provider.of<TaskData>(context).taskCount} Task\'s',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 15.0,
@@ -94,7 +81,7 @@ class _TaskScreenState extends State<TaskScreen> {
                   topRight: Radius.circular(20.0),
                 ),
               ),
-              child: TasksList(tasks),
+              child: TasksList(),
             ),
           ),
         ],

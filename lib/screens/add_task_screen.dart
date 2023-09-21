@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:todoey_flutter/models/task.dart';
+import 'package:todoey_flutter/models/task_data.dart';
+import 'package:provider/provider.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  final Function addTaskCallback;
-
   final taskHolder = TextEditingController();
 
   clearTextInput(){
     taskHolder.clear();
   }
-
-  AddTaskScreen(this.addTaskCallback);
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +49,9 @@ class AddTaskScreen extends StatelessWidget {
             const SizedBox(height: 20.0),
             TextButton(
               onPressed: () {
-                addTaskCallback(newTaskTile);
+                Provider.of<TaskData>(context,listen: false).addTask(newTaskTile);
                 clearTextInput();
+                Navigator.pop(context);
               },
               style: TextButton.styleFrom(
                 backgroundColor: Colors.blue,
