@@ -3,7 +3,7 @@ import 'package:todoey_flutter/models/task.dart';
 import 'dart:collection';
 
 class TaskData extends ChangeNotifier {
-  List<Task> _tasks = [];
+  final List<Task> _tasks = [];
 
   int get taskCount {
     return _tasks.length;
@@ -20,6 +20,11 @@ class TaskData extends ChangeNotifier {
 
   void updateTask(Task task) {
     task.toggleDone();
+    notifyListeners();
+  }
+
+  void deleteTask(Task task) {
+    _tasks.remove(task);
     notifyListeners();
   }
 }

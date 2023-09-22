@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:todoey_flutter/widgets/task_checkbox.dart';
 
 class TaskTile extends StatelessWidget {
   final bool isChecked;
   final String taskTitle;
   final Function(bool?) toggleCheckboxState;
+  final Function() longPressCallback;
 
-  TaskTile({required this.taskTitle, required this.isChecked, required this.toggleCheckboxState});
+  TaskTile({required this.taskTitle, required this.isChecked,
+    required this.toggleCheckboxState, required this.longPressCallback});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onLongPress: longPressCallback,
       title: Text(
         taskTitle,
         style: TextStyle(

@@ -51,7 +51,6 @@ class AddTaskScreen extends StatelessWidget {
               onPressed: () {
                 Provider.of<TaskData>(context,listen: false).addTask(newTaskTile);
                 clearTextInput();
-                Navigator.pop(context);
               },
               style: TextButton.styleFrom(
                 backgroundColor: Colors.blue,
